@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/plin-code/job-boards-skeleton/main/art/banner.png" alt="Job Boards Skeleton">
+</p>
+
 # Job Boards Skeleton
 
 Template for a [plin-code](https://github.com/plin-code) job board connector. Clone it, run the renaming checklist below, and you have a package that speaks the same contract as every other connector in the family.
