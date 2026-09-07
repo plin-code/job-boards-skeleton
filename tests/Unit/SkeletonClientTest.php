@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use PlinCode\JobBoards\Data\JobPostingDTO;
 use PlinCode\JobBoards\Skeleton\SkeletonClient;
-use PlinCode\JobBoards\Skeleton\Tests\Support\FakePsrClient;
-use PlinCode\JobBoards\Skeleton\Tests\Support\RecordingLogger;
+use PlinCode\JobBoards\Testing\FakePsrClient;
+use PlinCode\JobBoards\Testing\RecordingLogger;
 
 function skeletonClient(FakePsrClient $fake, ?RecordingLogger $logger = null): SkeletonClient
 {
