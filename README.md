@@ -136,7 +136,7 @@ composer test:unit     # pest
 composer test          # analyse + lint:check + test:unit
 ```
 
-Note that `tests/Support/` carries its own PSR-18 doubles. Core keeps its equivalents under its own `autoload-dev`, so they are not reachable from a dependent package.
+The PSR-18 test doubles come from core, under `PlinCode\JobBoards\Testing`: `FakePsrClient` (queue responses, assert on `lastUri()`), `PlainPsrClient` (does not advertise timeout support), `RecordingLogger` and `FakeNetworkException`. They ship in core's `src/`, not its `autoload-dev`, precisely so every connector uses the same ones instead of keeping a copy that drifts.
 
 ## License
 
