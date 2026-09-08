@@ -16,10 +16,11 @@ src/
 └── SkeletonServiceProvider.php   the only Laravel aware file
 config/job-boards-skeleton.php
 tests/
-├── Support/                      PSR-18 test doubles (FakePsrClient, RecordingLogger)
 ├── Unit/                         the client, no framework booted
 └── Feature/                      the service provider, under Testbench
 ```
+
+The PSR-18 test doubles are not in here. `FakePsrClient` and `RecordingLogger` live in core under `PlinCode\JobBoards\Testing`, so every connector fakes the transport the same way.
 
 `SkeletonClient` is a working placeholder, not pseudo code. It talks to a fictional provider whose account endpoint answers with
 
@@ -114,18 +115,13 @@ Steps 8, 9 and 10 still need eyes on them.
 
 ## Depending on core
 
-During local development this package resolves core through a path repository:
-
 ```json
-"repositories": [
-    { "type": "vcs", "url": "https://github.com/plin-code/job-boards-core.git" }
-],
 "require": {
-    "plin-code/job-boards-core": "^0.2"
+    "plin-code/job-boards-core": "^0.2||^0.3"
 }
 ```
 
-The `repositories` block is only needed while core is a private repository. Once it is on Packagist, delete the block and keep the constraint. Do **not** use a `path` repository here: it resolves against the layout of one machine and makes the package impossible to install from a fresh clone anywhere else.
+Core is on Packagist, so that constraint is all this package needs: there is no `repositories` block to carry. Do **not** commit a `path` repository pointing at a sibling checkout of core. It resolves against the layout of one machine, and the package then fails to install from a fresh clone anywhere else.
 
 ## Development
 
