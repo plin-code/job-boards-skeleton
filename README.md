@@ -94,6 +94,7 @@ Everything below is mechanical. `Skeleton` becomes your provider name in PascalC
 8. **Client body**: replace `API_BASE_URL`, the two timeout constants, the payload keys in `fetchJobsForCompany()` and `lookup()`, and the field mapping in `mapToDTO()`. Update the log messages, which name the provider.
 9. **Tests**: rename `tests/Unit/SkeletonClientTest.php` and `tests/Feature/SkeletonServiceProviderTest.php`, and update the fixtures to the real payload shape.
 10. **README**: this file. Replace the fictional payload, keep the Framework agnostic and Error handling sections.
+11. Delete `art/`. Those images are the skeleton's own banner. Regenerate the package's artwork from `plin-code/package-art` after the repository exists, or the README will show the wrong name.
 
 A `sed` pass covers steps 2, 3, 4, 6 and 7 in one go:
 
@@ -117,17 +118,14 @@ During local development this package resolves core through a path repository:
 
 ```json
 "repositories": [
-    { "type": "path", "url": "../job-boards-core", "options": { "symlink": true } }
-]
-```
-
-That block and the `"plin-code/job-boards-core": "*"` constraint are **for local development only**. Once core is published, drop the `repositories` block and pin the real constraint:
-
-```json
+    { "type": "vcs", "url": "https://github.com/plin-code/job-boards-core.git" }
+],
 "require": {
-    "plin-code/job-boards-core": "^0.1"
+    "plin-code/job-boards-core": "^0.2"
 }
 ```
+
+The `repositories` block is only needed while core is a private repository. Once it is on Packagist, delete the block and keep the constraint. Do **not** use a `path` repository here: it resolves against the layout of one machine and makes the package impossible to install from a fresh clone anywhere else.
 
 ## Development
 
